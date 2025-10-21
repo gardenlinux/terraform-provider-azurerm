@@ -45,6 +45,7 @@ jobs:
       fail-fast: true
       matrix:
         goarch: ["amd64", "arm64"]
+        os: ["linux", "darwin"]
     steps:
     - name: Checkout commit
       uses: actions/checkout@v4
@@ -64,7 +65,7 @@ jobs:
         product_name: ${{ env.PKG_NAME }}
         product_version: ${{ needs.set-product-version.outputs.product-version }}
         go_version: ${{ needs.get-go-version.outputs.go-version }}
-        os: linux
+        os: ${{ matrix.os }}
         arch: ${{ matrix.goarch }}
         reproducible: report
         instructions: |
